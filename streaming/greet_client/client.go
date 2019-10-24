@@ -7,8 +7,11 @@ import (
 	"log"
 	"time"
 
+	"google.golang.org/grpc/codes"
+
 	"github.com/k-washi/example-golang-gRPC/streaming/greetpb"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/status"
 )
 
 func main() {
@@ -37,7 +40,18 @@ func doUnary(c greetpb.GreetServiceClient) {
 
 	res, err := c.Greet(context.Background(), req)
 	if err != nil {
-		log.Printf("error while calling greet rpc: %v", err)
+		respErr, ok := status.FromError(err)
+		if ok {
+			// actual error from gRPC (user error)
+			fmt.Println(respErr.Message())
+			fmt.Println(respErr.Code())
+			if respErr.Code() == codes.InvalidArgument {
+				fmt.Println("We probably sent a empty string")
+			}
+		} else {
+			log.Printf("error while calling greet rpc: %v", err)
+		}
+
 	}
 
 	fmt.Printf("Response from greet server %v", res)

@@ -83,3 +83,10 @@ example: "streaming/GreetManyTimes"
 The client will send many message to the server and will receive one response from server, possibly an infinite number.
 
 example: "Streaming/LongGreet"
+
+## Error code
+
+https://grpc.io/docs/guides/error/
+
+example: "streaming/unary"
+

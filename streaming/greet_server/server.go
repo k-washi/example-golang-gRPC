@@ -9,6 +9,9 @@ import (
 	"strconv"
 	"time"
 
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
+
 	"github.com/k-washi/example-golang-gRPC/streaming/greetpb"
 
 	"google.golang.org/grpc"
@@ -20,6 +23,12 @@ type server struct{}
 func (*server) Greet(ctx context.Context, req *greetpb.GreetRequest) (*greetpb.GreetResponse, error) {
 	fmt.Printf("Greet func was invoked with %v", req)
 	firstName := req.GetGreeting().GetFirstName()
+	if firstName == "" {
+		return nil, status.Errorf(
+			codes.InvalidArgument,
+			"Recived a empty string",
+		)
+	}
 	result := "Hello " + firstName
 	res := &greetpb.GreetResponse{
 		Result: result,
