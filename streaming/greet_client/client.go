@@ -39,6 +39,14 @@ func doUnary(c greetpb.GreetServiceClient) {
 	}
 
 	res, err := c.Greet(context.Background(), req)
+
+	//Deadlins timeourt
+	/* -------------------------------------
+	ctx := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	res, err := c.Greet(ctx, req)
+	*/
+
 	if err != nil {
 		respErr, ok := status.FromError(err)
 		if ok {
@@ -47,7 +55,11 @@ func doUnary(c greetpb.GreetServiceClient) {
 			fmt.Println(respErr.Code())
 			if respErr.Code() == codes.InvalidArgument {
 				fmt.Println("We probably sent a empty string")
+
+			} else if respErr.Code() == codes.DeadlineExceeded {
+				fmt.Println("Timeout was hit! Deadline was exceeded")
 			}
+
 		} else {
 			log.Printf("error while calling greet rpc: %v", err)
 		}

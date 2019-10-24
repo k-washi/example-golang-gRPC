@@ -29,7 +29,18 @@ func (*server) Greet(ctx context.Context, req *greetpb.GreetRequest) (*greetpb.G
 			"Recived a empty string",
 		)
 	}
+
+	if ctx.Err() == context.Canceled {
+		return nil, status.Error(codes.Canceled, "the client canceld the request")
+	}
+
 	result := "Hello " + firstName
+	//client config deadline
+	/*
+		res := &greetpb.GreetWithDeadlineResponse{
+			Result: result,
+		}
+	*/
 	res := &greetpb.GreetResponse{
 		Result: result,
 	}
