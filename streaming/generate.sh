@@ -1,0 +1,1 @@
+protoc streaming/greetpb/greet.proto  --go_out=plugins=grpc:.

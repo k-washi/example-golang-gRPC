@@ -67,7 +67,19 @@ go run greet/greet_client/client.go
 ---
 
 Unary RPC calls wil be the most common for APIs.
-The client will send one message to the server and will receive on response from server.
+The client will send one message to the server and will receive one response from server.
 
 example: "unary"
 
+## Server streaming
+
+New king API thanks to HTTP/2.
+The client will send one message to the server and will receive many response from server, possibly an infinite number.
+
+example: "streaming/GreetManyTimes"
+
+## Client streaming
+
+The client will send many message to the server and will receive one response from server, possibly an infinite number.
+
+example: "Streaming/LongGreet"
