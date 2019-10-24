@@ -73,6 +73,8 @@ example: "unary"
 
 ## Server streaming
 
+---
+
 New king API thanks to HTTP/2.
 The client will send one message to the server and will receive many response from server, possibly an infinite number.
 
@@ -80,17 +82,23 @@ example: "streaming/GreetManyTimes"
 
 ## Client streaming
 
+---
+
 The client will send many message to the server and will receive one response from server, possibly an infinite number.
 
 example: "Streaming/LongGreet"
 
 ## Error code
 
+---
+
 https://grpc.io/docs/guides/error/
 
 example: "streaming/unary"
 
 ## Deadline
+
+---
 
 https://grpc.io/blog/deadlines/
 
