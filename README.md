@@ -64,3 +64,10 @@ go run greet/greet_client/client.go
 
 ## Unary
 
+---
+
+Unary RPC calls wil be the most common for APIs.
+The client will send one message to the server and will receive on response from server.
+
+example: "unary"
+
